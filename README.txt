@@ -22,6 +22,7 @@ The income level of an entry can optionally be shown as a content block within a
 
 Here are a couple other great extensions that enhance your expirence with the Connections Business Directory:
 
+
 * [Business Hours](http://wordpress.org/plugins/connections-business-directory-hours/)
 * [Toolbar](http://wordpress.org/plugins/connections-toolbar/)
 
