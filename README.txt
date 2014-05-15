@@ -25,6 +25,7 @@ Here are a couple other great extensions that enhance your expirence with the Co
 
 * [Business Hours](http://wordpress.org/plugins/connections-business-directory-hours/)
 * [Toolbar](http://wordpress.org/plugins/connections-toolbar/)
+* [Education Level](http://wordpress.org/plugins/connections-business-directory-education-levels/)
 
 == Installation ==
 
