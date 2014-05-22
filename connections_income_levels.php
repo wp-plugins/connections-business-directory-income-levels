@@ -13,7 +13,7 @@
  * Plugin Name:       Connections Incomes Levels
  * Plugin URI:        http://connections-pro.com
  * Description:       An extension for the Connections plugin which adds a metabox for income levels.
- * Version:           1.0
+ * Version:           1.0.1
  * Author:            Steven A. Zahm
  * Author URI:        http://connections-pro.com
  * License:           GPL-2.0+
@@ -72,7 +72,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function defineConstants() {
 
-			define( 'CNIL_CURRENT_VERSION', '1.0' );
+			define( 'CNIL_CURRENT_VERSION', '1.0.1' );
 			define( 'CNIL_DIR_NAME', plugin_basename( dirname( __FILE__ ) ) );
 			define( 'CNIL_BASE_NAME', plugin_basename( __FILE__ ) );
 			define( 'CNIL_PATH', plugin_dir_path( __FILE__ ) );
@@ -152,7 +152,8 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		private static function levels() {
 
 			$options = array(
-				'0'   => __( 'Under $5,000', 'connections_income_levels'),
+				'-1'  => __( 'Choose...', 'connections_income_levels'),
+				'1'   => __( 'Under $5,000', 'connections_income_levels'),
 				'5'   => __( '$5,000 to $9,999', 'connections_income_levels'),
 				'10'  => __( '$10,000 to $14,999', 'connections_income_levels'),
 				'15'  => __( '$15,000 to $19,999', 'connections_income_levels'),
@@ -211,7 +212,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function income( $level = '' ) {
 
-			if ( ! is_string( $level ) || empty( $level ) ) {
+			if ( ! is_string( $level ) ) {
 
 				return FALSE;
 			}
@@ -245,6 +246,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 						'id'      => 'income_level',
 						'type'    => 'select',
 						'options' => self::levels(),
+						'default' => '-1',
 						),
 					),
 				);
