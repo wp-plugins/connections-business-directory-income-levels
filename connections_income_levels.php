@@ -13,7 +13,7 @@
  * Plugin Name:       Connections Incomes Levels
  * Plugin URI:        http://connections-pro.com
  * Description:       An extension for the Connections plugin which adds a metabox for income levels.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Steven A. Zahm
  * Author URI:        http://connections-pro.com
  * License:           GPL-2.0+
@@ -51,12 +51,12 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 			// Register the metabox and fields.
 			add_action( 'cn_metabox', array( __CLASS__, 'registerMetabox') );
 
-			// Add the business hours option to the admin settings page.
+			// Add the income level option to the admin settings page.
 			// This is also required so it'll be rendered by $entry->getContentBlock( 'income_level' ).
 			add_filter( 'cn_content_blocks', array( __CLASS__, 'settingsOption') );
 
 			// Add the action that'll be run when calling $entry->getContentBlock( 'income_level' ) from within a template.
-			add_action( 'cn_output_meta_field-income_levels', array( __CLASS__, 'block' ), 10, 4 );
+			add_action( 'cn_output_meta_field-income_level', array( __CLASS__, 'block' ), 10, 4 );
 
 			// Register the widget.
 			add_action( 'widgets_init', create_function( '', 'register_widget( "CN_Income_Levels_Widget" );' ) );
@@ -72,7 +72,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function defineConstants() {
 
-			define( 'CNIL_CURRENT_VERSION', '1.0.1' );
+			define( 'CNIL_CURRENT_VERSION', '1.0.2' );
 			define( 'CNIL_DIR_NAME', plugin_basename( dirname( __FILE__ ) ) );
 			define( 'CNIL_BASE_NAME', plugin_basename( __FILE__ ) );
 			define( 'CNIL_PATH', plugin_dir_path( __FILE__ ) );
@@ -212,7 +212,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		private static function income( $level = '' ) {
 
-			if ( ! is_string( $level ) ) {
+			if ( ! is_string( $level ) || empty( $level ) || $level === '-1' ) {
 
 				return FALSE;
 			}
@@ -265,7 +265,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		public static function settingsOption( $blocks ) {
 
-			$blocks['income_levels'] = 'Income Level';
+			$blocks['income_level'] = 'Income Level';
 
 			return $blocks;
 		}
@@ -288,7 +288,7 @@ if ( ! class_exists('Connections_Income_Levels') ) {
 		 */
 		public static function block( $id, $value, $object = NULL, $atts ) {
 
-			if ( $income = self::income( $value) ) {
+			if ( $income = self::income( $value ) ) {
 
 				printf( '<div class="cn-income-level">%1$s</div>', esc_attr( $income ) );
 			}
